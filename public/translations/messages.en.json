@@ -1,0 +1,10 @@
+{
+  "app.title": "Hello Sample App",
+  "pages.counter.increment": "Increment",
+  "pages.counter.decrement": "Decrement",
+  "pages.counter.increase2": "Increase by 2",
+  "pages.counter.increase4": "Delayed + 4",
+  "pages.about.desc": "You are on the about page",
+  "pages.no-match": "No match",
+  "pages.home": "You are home"
+}

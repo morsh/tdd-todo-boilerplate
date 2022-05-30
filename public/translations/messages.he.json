@@ -1,0 +1,10 @@
+{
+  "app.title": "שלום אפליקציית דוגמא",
+  "pages.counter.increment": "הוסף",
+  "pages.counter.decrement": "החסר",
+  "pages.counter.increase2": "הוסף 2",
+  "pages.counter.increase4": "המתנה + 4",
+  "pages.about.desc": "את.ה בדף האודות",
+  "pages.no-match": "אין התאמה",
+  "pages.home": "את.ה בדף הבית"
+}
