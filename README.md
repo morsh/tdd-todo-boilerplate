@@ -17,9 +17,6 @@ The following resources are in use in this project:
 - Style Components
 - Enforcement of code coverage
 - Define react and react-dom as externals
-- Logging
-- Telemetry
-- ECS - Feature Flag Service
 - HMR - hot module reload (with CRA)
 
 # Getting Started with Create React App
