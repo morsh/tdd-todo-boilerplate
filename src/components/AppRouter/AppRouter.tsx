@@ -5,6 +5,7 @@ import { About } from '../About/About';
 import { Home } from './Routes/Home';
 import { NoMatch } from './Routes/NoMatch';
 import s from './AppRouter.module.css';
+import { TodoRoot } from '../Todo';
 
 export const LocationDisplay = () => {
   const location = useLocation();
@@ -22,6 +23,7 @@ export const AppRouter = () => (
       <Route path='/' element={<Home />} />
       <Route path='/about' element={<About />} />
       <Route path='/counter' element={<Counter />} />
+      <Route path='/todo' element={<TodoRoot />} />
       <Route path='*' element={<NoMatch />} />
     </Routes>
 
