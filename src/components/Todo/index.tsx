@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
-import { useDispatcher } from '../../redux/dispatchers/useDispatcher';
-import { TodoList } from './TodoList';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadTodos } from "../../redux/reducers/todoSlice";
+import { AppDispatch } from "../../redux/store/configureStore";
+import { TodoList } from "./TodoList";
 
 export const TodoRoot = () => {
-  const { loadTodos } = useDispatcher('loadTodos');
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    loadTodos();
+    dispatch(loadTodos);
   }, []);
 
   return <TodoList />;

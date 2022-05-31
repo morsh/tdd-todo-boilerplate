@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store/configureStore';
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { ActionFn, RootState } from "../store/configureStore";
 
 export interface Todo {
   id: number;
@@ -7,17 +8,25 @@ export interface Todo {
   isActive: boolean;
 }
 
+export const loadTodos: ActionFn = async (dispatch) => {
+  const {
+    data: { todos },
+  } = await axios.get("http://localhost:3001/todos");
+  dispatch(todoSlice.actions.set(todos));
+};
+
 export const todoSlice = createSlice({
-  name: 'todos',
+  name: "todos",
   initialState: [] as Todo[],
   reducers: {
     set: (_, action: { type: string; payload: Todo[] }) => action.payload,
-    remove: (state, action: { type: string; payload: number }) => state.filter(({ id }) => id !== action.payload),
-  }
+    remove: (state, action: { type: string; payload: number }) =>
+      state.filter(({ id }) => id !== action.payload),
+  },
 });
 
 export const getTodos = (state: RootState) => state.todos;
-export const getTodo = (id: number) => (state: RootState) => state.todos.find(todo => todo.id === id)!;
+export const getTodo = (id: number) => (state: RootState) =>
+  state.todos.find((todo) => todo.id === id)!;
 
 export const todoReducer = todoSlice.reducer;
-
