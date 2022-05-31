@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-app-rewired start",
+    "dev": "node __tests__/dev/server.js",
     "watch": "react-app-rewired test",
     "start:no-browser": "BROWSER=none react-app-rewired start",
     "build": "react-app-rewired build",
@@ -55,8 +56,8 @@
     "@types/jest-environment-puppeteer": "^5.0.2",
     "@types/node": "^16.7.13",
     "@types/puppeteer": "^5.4.6",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@types/react-helmet": "^6.1.5",
     "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
@@ -67,6 +68,7 @@
     "chance": "^1.1.8",
     "eslint": "^8.16.0",
     "eslint-plugin-jsdoc": "^39.3.2",
+    "express": "^4.17.1",
     "jest": "^28.0.3",
     "jest-location-mock": "^1.0.9",
     "jest-mock-axios": "^4.6.1",
@@ -114,7 +116,8 @@
       "src/__mocks__/",
       "src/index.ts",
       "src/reportWebVitals.ts",
-      "src/i18n/i18n.ts"
+      "src/i18n/i18n.ts",
+      "src/components/Loader/Loader.ts"
     ],
     "coverageThreshold": {
       "global": {
