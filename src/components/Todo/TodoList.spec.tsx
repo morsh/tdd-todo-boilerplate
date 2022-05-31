@@ -12,10 +12,9 @@ describe('TodoList', () => {
   });
 
   it('should render a single item', () => {
-    const title = chance.string();
-    const todos: Todo[] = [todoBuilder().given.title(title).build()];
-    render(<TodoList />, { preloadedState: { todos } });
-    expect(screen.getByTestId('todo-title')).toHaveTextContent(title);
+    const todo = todoBuilder().build();
+    render(<TodoList />, { preloadedState: { todos: [todo] } });
+    expect(screen.getByTestId('todo-title')).toHaveTextContent(todo.title);
   });
 
   it('should render a list of items', async () => {
