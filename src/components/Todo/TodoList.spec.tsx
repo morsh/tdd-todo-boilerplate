@@ -81,4 +81,49 @@ describe("TodoList", () => {
       await waitFor(() => expect(elementToDelete).not.toBeInTheDocument());
     });
   });
+
+  describe("AddTodo", () => {
+    beforeEach(() => {
+      mockAxios.reset();
+      mockAxios.onPost("http://localhost:3001/todos").reply(200);
+    });
+
+    it("should call add todo", async () => {
+      render(<TodoList />);
+      const title = chance.string();
+      mockAxios
+        .onGet("http://localhost:3001/todos")
+        .reply(200, { todos: [{ id: 1, title, isActive: true }] });
+      userEvent.type(screen.getByTestId("add-todo-input"), title);
+      userEvent.click(screen.getByTestId("add-todo-button"));
+      await waitFor(() =>
+        expect(screen.getByTestId("todo-title")).toHaveTextContent(title)
+      );
+      expect(mockAxios.history.post).toHaveLength(1);
+      expect(JSON.parse(mockAxios.history.post[0].data)).toEqual({
+        title,
+        isActive: true,
+      });
+    });
+  });
+
+  describe("DeleteTodo", () => {
+    beforeEach(() => {
+      mockAxios.reset();
+    });
+
+    it("should call add todo", async () => {
+      const todos: Todo[] = chance.n(
+        () => todoBuilder().build(),
+        chance.integer({ min: 1, max: 10 })
+      );
+      const todo = chance.pickone(todos);
+      mockAxios.onDelete(`http://localhost:3001/todos/${todo.id}`).reply(200);
+      render(<TodoList />, { preloadedState: { todos } });
+      const elementToDelete = screen.getByTestId(`todo-title-${todo.id}`);
+
+      userEvent.click(screen.getByTestId(`todo-delete-${todo.id}`));
+      await waitFor(() => expect(elementToDelete).not.toBeInTheDocument());
+    });
+  });
 });
