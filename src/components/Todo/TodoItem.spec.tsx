@@ -1,7 +1,7 @@
 import { chance } from '../../../__tests__/utils/chance';
 import { render, screen } from '../../../__tests__/utils/testRenderer';
 import { Todo } from '../../redux/reducers/todoSlice';
-import { todoBuilder } from './todoBuilder';
+import { todoBuilder } from './todo.builder';
 import { TodoItem } from './TodoItem';
 
 describe('TodoItem', () => {

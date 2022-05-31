@@ -75,3 +75,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 Using `thunk` a third parameter is passed to any call to a redux action.
 Keep in mind those services are only facades, and should contain no state or logic relevant to the application.
 Using them as logic-less facades means we can safely mock them in tests and supply/receive mock data.
+
+
+# Todo
+
+- spec vs test
+- eslint + prettier?
+- .editorconfig

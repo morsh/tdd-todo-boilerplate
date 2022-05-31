@@ -13,11 +13,22 @@ export const loadTodos: ActionFn = async (dispatch) => {
   dispatch(todoSlice.actions.set(todos));
 };
 
+export const addTodo: (title: string) => ActionFn = title => async (dispatch) => {
+  await axios.post('http://localhost:3001/todos', { title, isActive: true });
+  dispatch(loadTodos);
+};
+
+export const deleteTodo: (id: number) => ActionFn = id => async (dispatch) => {
+  await axios.delete(`http://localhost:3001/todos/${id}`);
+  dispatch(todoSlice.actions.remove(id));
+};
+
 export const todoSlice = createSlice({
   name: 'todos',
   initialState: [] as Todo[],
   reducers: {
     set: (_, action: { type: string; payload: Todo[] }) => action.payload,
+    remove: (state, action: { type: string; payload: number }) => state.filter(({ id }) => id !== action.payload),
   }
 });
 

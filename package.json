@@ -117,7 +117,8 @@
       "src/index.ts",
       "src/reportWebVitals.ts",
       "src/i18n/i18n.ts",
-      "src/components/Loader/Loader.ts"
+      "src/components/Loader/Loader.ts",
+      ".builder.ts"
     ],
     "coverageThreshold": {
       "global": {
