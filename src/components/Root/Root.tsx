@@ -8,6 +8,8 @@ import { Helmet } from 'react-helmet';
 import { getLocaleFromUrlParams } from '../../utils/getLocaleFromUrlParams';
 import { Loader } from '../Loader/Loader';
 import './Root.css';
+import { DispatchersProvider } from '../../redux/dispatchers/context';
+import { createDispatcers } from '../../redux/dispatchers/dispatchers';
 
 export const Root = () => {
 
@@ -25,9 +27,11 @@ export const Root = () => {
     <Suspense data-hook='app-fallback' fallback={<Loader />}>
       <Helmet htmlAttributes={{ lang: locale, dir: getDIRFromLocale(locale) }} />
       <Provider store={store}>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <DispatchersProvider dispatchers={createDispatcers()}>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </DispatchersProvider>
       </Provider>
     </Suspense>
   );

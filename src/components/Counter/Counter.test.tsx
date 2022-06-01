@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen, waitFor } from '../../../__tests__/utils/testRenderer';
+import { render, screen } from '../../../__tests__/utils/testRenderer';
 import { Counter } from './Counter';
 
 // Todo: update tests
@@ -35,21 +35,15 @@ describe('Counter', () => {
     expect(screen.getByTestId('counter-value')).toContainHTML('0');
   });
 
-  it('should decrement by 2', () => {
+  it('should increment by 2', () => {
     render(<Counter />);
     userEvent.click(screen.getByTestId('counter-inc2'));
     expect(screen.getByTestId('counter-value')).toContainHTML('2');
   });
 
-  it('should decrement by 4', async () => {
-    render(<Counter />);
+  it('should increment by 4', () => {
+    const { dispatchers } = render(<Counter />);
     userEvent.click(screen.getByTestId('counter-inc4'));
-    await waitFor(() => expect(screen.getByTestId('counter-value')).toContainHTML('4'));
-  });
-
-  it('should send logs when decrementing by 4', async () => {
-    render(<Counter />);
-    userEvent.click(screen.getByTestId('counter-inc4'));
-    await waitFor(() => expect(screen.getByTestId('counter-value')).toContainHTML('4'));
+    expect(dispatchers.incrementBy4WithDelay).toBeCalled();
   });
 });

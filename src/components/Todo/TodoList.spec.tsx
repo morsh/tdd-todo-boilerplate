@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { chance } from '../../../__tests__/utils/chance';
 import { render, screen, waitFor } from '../../../__tests__/utils/testRenderer';
 import { Todo } from '../../redux/reducers/todoSlice';
-import { todoBuilder } from './todo.builder';
+import { todoBuilder } from './todoBuilder';
 import { TodoList } from './TodoList';
 
 const mockAxios = new MockAdapter(axios);
@@ -39,7 +39,7 @@ describe('TodoList', () => {
     });
 
     it('should call add todo', async () => {
-      render(<TodoList />);
+      render(<TodoList />, { realReducers: true });
       const title = chance.string();
       mockAxios.onGet('http://localhost:3001/todos').reply(200, { todos: [{ id: 1, title, isActive: true }]});
       userEvent.type(screen.getByTestId('add-todo-input'), title);
@@ -60,7 +60,7 @@ describe('TodoList', () => {
       const todos: Todo[] = chance.n(() => todoBuilder().build(), chance.integer({ min: 1, max: 10 }));
       const todo = chance.pickone(todos);
       mockAxios.onDelete(`http://localhost:3001/todos/${todo.id}`).reply(200);
-      render(<TodoList />, { preloadedState: { todos }});
+      render(<TodoList />, { preloadedState: { todos }, realReducers: true });
       const elementToDelete = screen.getByTestId(`todo-title-${todo.id}`);
 
       userEvent.click(screen.getByTestId(`todo-delete-${todo.id}`));

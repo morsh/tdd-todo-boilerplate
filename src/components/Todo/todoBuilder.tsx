@@ -8,12 +8,6 @@ export const todoBuilder = () => {
     isActive: true,
   };
   const api = {
-    given: {
-      title: (title: string) => {
-        todo.title = title;
-        return api;
-      }
-    },
     build: () => todo,
   };
   return api;

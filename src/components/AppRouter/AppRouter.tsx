@@ -5,7 +5,7 @@ import { About } from '../About/About';
 import { Home } from './Routes/Home';
 import { NoMatch } from './Routes/NoMatch';
 import s from './AppRouter.module.css';
-import { TodoRoot } from '../Todo/TodoRoot';
+import { TodoRoot } from '../Todo';
 
 export const LocationDisplay = () => {
   const location = useLocation();

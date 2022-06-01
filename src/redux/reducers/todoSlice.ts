@@ -1,27 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { ActionFn, RootState } from '../store/configureStore';
+import { RootState } from '../store/configureStore';
 
 export interface Todo {
   id: number;
   title: string;
   isActive: boolean;
 }
-
-export const loadTodos: ActionFn = async (dispatch) => {
-  const { data: { todos } } = await axios.get('http://localhost:3001/todos');
-  dispatch(todoSlice.actions.set(todos));
-};
-
-export const addTodo: (title: string) => ActionFn = title => async (dispatch) => {
-  await axios.post('http://localhost:3001/todos', { title, isActive: true });
-  dispatch(loadTodos);
-};
-
-export const deleteTodo: (id: number) => ActionFn = id => async (dispatch) => {
-  await axios.delete(`http://localhost:3001/todos/${id}`);
-  dispatch(todoSlice.actions.remove(id));
-};
 
 export const todoSlice = createSlice({
   name: 'todos',

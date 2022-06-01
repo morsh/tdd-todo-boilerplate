@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTodo, getTodo } from '../../redux/reducers/todoSlice';
+import { useDispatchers } from '../../redux/dispatchers/context';
+import { getTodo } from '../../redux/reducers/todoSlice';
 import { AppDispatch } from '../../redux/store/configureStore';
 
 
 export const TodoItem = ({ id }: { id: number }) => {
   const { title } = useSelector(getTodo(id));
   const dispatch = useDispatch<AppDispatch>();
+  const { deleteTodo } = useDispatchers();
 
   return (
     <div data-hook="todo-title" data-id={id}>
