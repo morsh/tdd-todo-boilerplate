@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { chance } from '../../../__tests__/utils/chance';
 import { render, screen } from '../../../__tests__/utils/testRenderer';
 import { Todo } from '../../redux/reducers/todoSlice';
@@ -11,5 +12,13 @@ describe('TodoItem', () => {
     const allTodos = chance.shuffle([...todos, todo]);
     render(<TodoItem id={todo.id} />, { preloadedState: { todos: allTodos } });
     expect(screen.getByTestId('todo-title')).toHaveTextContent(todo.title);
+  });
+
+  it('should dispatch a delete for the todo', () => {
+    const todo = todoBuilder().build();
+    const allTodos = chance.shuffle([todo]);
+    const { dispatchers } = render(<TodoItem id={todo.id} />, { preloadedState: { todos: allTodos } });
+    userEvent.click(screen.getByTestId(`todo-delete-${todo.id}`));
+    expect(dispatchers.deleteTodo).toBeCalled();
   });
 });
