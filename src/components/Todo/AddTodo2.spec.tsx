@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../../__tests__/utils/testRenderer';
-import { AddTodo } from './AddTodo';
+import { AddTodo, AddTodoComponent } from './AddTodo2';
 
 describe('AddTodo', () => {
   it('should add a new todo', () => {
@@ -9,8 +9,9 @@ describe('AddTodo', () => {
   });
 
   it('should not call addItem when input is empty', () => {
-    const { dispatchers: dependecnies } = render(<AddTodo />);
+    const bla = jest.fn();
+    render(<AddTodoComponent onClick={bla} />);
     userEvent.click(screen.getByTestId('add-todo-button'));
-    expect(dependecnies.addTodo).not.toBeCalled();
+    expect(bla).not.toBeCalled();
   });
 });

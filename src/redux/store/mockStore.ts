@@ -7,7 +7,7 @@ interface StubResult { store: AppStore; services: MockedServices }
 
 interface Params { preloadedState?: Partial<RootState>; reducer?: any; services?: MockedServices }
 
-export const createMockStore = ({ preloadedState, reducer: mockReducer, services }: Params): StubResult => {
+export const createMockStore = ({ preloadedState, reducer: mockReducer, services }: Params = {}): StubResult => {
   const mockServices = services || createMockServices() ;
   const store = configureStore({
     reducer: mockReducer || reducer,

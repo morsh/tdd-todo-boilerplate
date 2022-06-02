@@ -7,7 +7,7 @@ export const loadTodos = (): ActionFn => async (dispatch) => {
   dispatch(todoSlice.actions.set(todos));
 };
 
-export const addTodo: (title: string) => ActionFn = title => async function (dispatch) {
+export const addTodo = (title: string): ActionFn => async function (dispatch) {
   await axios.post('http://localhost:3001/todos', { title, isActive: true });
   dispatch(loadTodos());
 };

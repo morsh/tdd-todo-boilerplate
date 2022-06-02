@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 import { Dispatchers } from './dispatchers';
 
 export const DispatchersContext = createContext<Dispatchers>(null as any);
@@ -10,9 +10,3 @@ export const DispatchersProvider = ({ dispatchers, children }: React.PropsWithCh
     </DispatchersContext.Provider>
   );
 };
-
-export const useDispatchers = () => {
-  const dispatchers = useContext(DispatchersContext);
-  return dispatchers;
-};
-

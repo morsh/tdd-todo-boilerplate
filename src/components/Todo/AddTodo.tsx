@@ -1,16 +1,13 @@
 import { useCallback, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useDispatchers } from '../../redux/dispatchers/context';
-import { AppDispatch } from '../../redux/store/configureStore';
+import { useDispatcher } from '../../redux/dispatchers/useDispatcher';
 
 export const AddTodo = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { addTodo } = useDispatchers();
+  const { addTodo } = useDispatcher('addTodo');
 
   const onClick = useCallback(() => {
     if (inputRef.current!.value) {
-      dispatch(addTodo(inputRef.current!.value));
+      addTodo(inputRef.current!.value);
     }
   }, []);
 
