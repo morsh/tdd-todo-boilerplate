@@ -118,7 +118,8 @@
       "src/reportWebVitals.ts",
       "src/i18n/i18n.ts",
       "src/components/Loader/Loader.ts",
-      ".builder.ts"
+      ".builder.ts",
+      "src/components/Todo/AddTodo2.tsx"
     ],
     "coverageThreshold": {
       "global": {
