@@ -8,7 +8,7 @@ describe('Logger', () => {
   let params: { [key: string]: string };
 
   const withLevel = (level: EventLevel) => ({
-    level, logSource: LogSource.VivaSalesCI, loggerName
+    level, logSource: LogSource.SomeSource, loggerName
   });
 
   let mockOnEvent: jest.Mock;
@@ -20,13 +20,13 @@ describe('Logger', () => {
     guid = chance.guid();
     params = { [chance.word()]: chance.string() };
     mockOnEvent = jest.fn();
-    logger = createLogger(loggerName, mockOnEvent, LogSource.VivaSalesCI);
+    logger = createLogger(loggerName, mockOnEvent, LogSource.SomeSource);
   });
 
   describe('info', () => {
     it('should log info when calling info', () => {
       logger.info(guid, message);
-      expect(mockOnEvent).toBeCalledWith(guid, message, { level: EventLevel.Info, logSource: 'VivaSalesCI', loggerName });
+      expect(mockOnEvent).toBeCalledWith(guid, message, { level: EventLevel.Info, logSource: 'SomeSource', loggerName });
     });
 
     it('should log info with params', () => {
