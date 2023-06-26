@@ -15,7 +15,6 @@ export const EventLevelValues: EventLevels[] = Object.values(EventLevels).filter
 export interface TelemetryEventDetails {
   UserAgent: string;
   UserInfo_Language: string;
-  UserInfo_TimeZone: number;
   DeviceInfo_BrowserName?: string;
   DeviceInfo_BrowserVersion?: string;
   DeviceInfo_OsName?: string;
