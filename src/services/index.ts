@@ -7,7 +7,7 @@ export interface Services {
 }
 
 export const createServices = (): Services => {
-  const logger = createLogger('viva-sales-ci-teams', console.log, LogSource.VivaSalesCI);
+  const logger = createLogger('tdd-todo-starter', console.log, LogSource.SomeSource);
 
   return ({
     logger,

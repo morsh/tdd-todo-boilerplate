@@ -1,5 +1,5 @@
 export enum LogSource {
-  VivaSalesCI = 'VivaSalesCI'
+  SomeSource = 'SomeSource'
 }
 export enum EventLevel {
   Info,
