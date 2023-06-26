@@ -12,7 +12,6 @@ import { getDefaultEventDetails } from './getDefaultEventDetails';
 const defaultEventDetails: TelemetryEventDetails = {
   UserAgent:  'MOCK_USER_AGENT',
   UserInfo_Language: 'en-US',
-  UserInfo_TimeZone: chance.integer(),
   DeviceInfo_BrowserName: 'MOCK_CHROME',
   DeviceInfo_BrowserVersion: 'MOCK_CHROME_VERSION',
   DeviceInfo_OsName: 'MOCK_MAC_OSX',

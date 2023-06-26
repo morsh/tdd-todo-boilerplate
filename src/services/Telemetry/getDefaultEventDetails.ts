@@ -1,5 +1,4 @@
 import Bowser from 'bowser';
-import { dayJS } from '../../utils/date';
 
 export const getDefaultEventDetails = () => {
   const { browser, os } = Bowser.parse(window.navigator.userAgent);
@@ -7,7 +6,6 @@ export const getDefaultEventDetails = () => {
   return ({
     UserAgent: window.navigator.userAgent,
     UserInfo_Language: window.navigator.language,
-    UserInfo_TimeZone: dayJS().utcOffset(),
     DeviceInfo_BrowserName: browser.name,
     DeviceInfo_BrowserVersion: browser.version,
     DeviceInfo_OsName: os.name,
