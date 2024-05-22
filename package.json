@@ -55,7 +55,7 @@
     "@types/jest": "^27.0.1",
     "@types/jest-environment-puppeteer": "^5.0.2",
     "@types/node": "^16.7.13",
-    "@types/puppeteer": "^5.4.6",
+    "@types/puppeteer": "^7.0.4",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/react-helmet": "^6.1.5",
