@@ -4,41 +4,43 @@ import userEvent from "@testing-library/user-event";
 import { chance } from "../../../__tests__/utils/chance";
 import { render, screen, waitFor } from "../../../__tests__/utils/testRenderer";
 import { Todo } from "../../redux/reducers/todoSlice";
-import { someTodos, todoBuilder } from "./todo.builder";
+import { aTodo, someTodos, todoBuilder } from "./todo.builder";
 import { TodoList } from "./TodoList";
-import { TodoDriver } from "./TodoItem.driver";
-
-const mockAxios = new MockAdapter(axios);
+import { TodoListDriver } from "./TodoListDriver";
 
 describe("TodoList", () => {
+  let driver: TodoListDriver;
+  let mockAxios = new MockAdapter(axios);
+
+  beforeEach(() => {
+    driver = new TodoListDriver();
+    mockAxios.reset();
+  });
+
   it("should show an empty list", () => {
-    render(<TodoList />);
-    expect(screen.getByTestId("empty-list")).toBeInTheDocument();
-    expect(screen.getByTestId("add-todo")).toBeInTheDocument();
+    driver.when.render();
+    expect(driver.get.emptyList()).toBeInTheDocument();
+    expect(driver.get.addTodo()).toBeInTheDocument();
   });
 
   it("should render a single item", () => {
-    const todo = todoBuilder().build();
-    render(<TodoList />, { preloadedState: { todos: [todo] } });
-    const driver = new TodoDriver().given.todoIdToRender(todo.id);
-    expect(driver.get.title()).toHaveTextContent(todo.title);
-    expect(screen.getByTestId("add-todo")).toBeInTheDocument();
+    const todo = aTodo();
+    driver.given.todos([todo]).when.render();
+    expect(driver.get.todo(todo).get.title()).toHaveTextContent(todo.title);
+    expect(driver.get.addTodo()).toBeInTheDocument();
   });
 
   it("should render a list of items", async () => {
     const todos = someTodos();
-    render(<TodoList />, { preloadedState: { todos } });
-    expect(await screen.findAllByTestId("todo-title")).toHaveLength(
-      todos.length
-    );
-    expect((await screen.findAllByTestId("todo-title"))[0]).toHaveTextContent(
-      todos[0].title
-    );
+    driver.given.todos(todos).when.render();
+
+    const todoItems = await driver.get.findAllTodoItems();
+    expect(todoItems).toHaveLength(todos.length);
+    expect(todoItems[0]).toHaveTextContent(todos[0].title);
   });
 
   describe("AddTodo", () => {
     beforeEach(() => {
-      mockAxios.reset();
       mockAxios.onPost("http://localhost:3001/todos").reply(200);
     });
 
@@ -62,10 +64,6 @@ describe("TodoList", () => {
   });
 
   describe("DeleteTodo", () => {
-    beforeEach(() => {
-      mockAxios.reset();
-    });
-
     it("should call add todo", async () => {
       const todos: Todo[] = chance.n(
         () => todoBuilder().build(),
@@ -83,7 +81,6 @@ describe("TodoList", () => {
 
   describe.skip("AddTodo", () => {
     beforeEach(() => {
-      mockAxios.reset();
       mockAxios.onPost("http://localhost:3001/todos").reply(200);
     });
 
@@ -107,10 +104,6 @@ describe("TodoList", () => {
   });
 
   describe("DeleteTodo", () => {
-    beforeEach(() => {
-      mockAxios.reset();
-    });
-
     it.skip("should call add todo", async () => {
       const todos: Todo[] = chance.n(
         () => todoBuilder().build(),
