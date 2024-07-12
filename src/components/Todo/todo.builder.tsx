@@ -18,3 +18,7 @@ export const todoBuilder = () => {
   };
   return api;
 };
+
+export const aTodo = () => todoBuilder().build();
+export const someTodos = (count = chance.integer({ min: 1, max: 10 })) =>
+  chance.n(aTodo, count);

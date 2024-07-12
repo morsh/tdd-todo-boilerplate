@@ -29,4 +29,6 @@ export const getTodos = (state: RootState) => state.todos;
 export const getTodo = (id: number) => (state: RootState) =>
   state.todos.find((todo) => todo.id === id)!;
 
+export const deleteTodo = todoSlice.actions.remove;
+
 export const todoReducer = todoSlice.reducer;
