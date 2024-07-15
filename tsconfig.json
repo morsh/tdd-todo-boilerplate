@@ -23,7 +23,8 @@
     "types": [
       "puppeteer",
       "jest-environment-puppeteer",
-      "expect-puppeteer"
+      "expect-puppeteer",
+      "@testing-library/jest-dom",
     ]
   },
   "include": [
